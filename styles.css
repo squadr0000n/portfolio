@@ -39,21 +39,20 @@ body{
   max-width:1100px;
   background:linear-gradient(180deg,var(--panel), #0a0a0a);
   border-radius:14px;
-  overflow:hidden;
   display:flex;
   gap:0;
   box-shadow: 0 10px 40px rgba(0,0,0,0.7);
   border:1px solid rgba(31,182,177,0.08);
+  overflow:visible; /* чтобы свечение не обрезалось */
 }
 .hero-image{
   flex:1 1 48%;
   min-height:420px;
   position:relative;
-  overflow:hidden;
-  background:linear-gradient(135deg, rgba(31,182,177,0.03), rgba(0,0,0,0.2));
   display:flex;
   align-items:center;
   justify-content:center;
+  overflow:visible;
 }
 .hero-image img{
   width:80%;
@@ -65,28 +64,24 @@ body{
   filter: drop-shadow(0 6px 20px rgba(0,0,0,0.6));
   border: 2px solid rgba(255,255,255,0.03);
   position:relative;
-  overflow:hidden;
 }
-.hero-image img::after{
+.hero-image::after{
   content:"";
   position:absolute;
-  top:0;left:-75%;
-  width:50%;height:100%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.12),transparent);
-  transform:skewX(-25deg);
+  inset:0;
+  border-radius:inherit;
+  background:radial-gradient(40% 60% at 50% 50%, rgba(31,182,177,0.18) 0%, rgba(31,182,177,0) 70%);
+  opacity:0;
+  transition:opacity 300ms ease;
 }
 .hero-image:hover img{
-  transform: scale(1.12) translateX(-6px);
+  transform: scale(1.08) translateX(-6px);
   filter: drop-shadow(0 12px 40px rgba(31,182,177,0.25));
   box-shadow: 0 18px 60px rgba(31,182,177,0.12);
   border-color: rgba(31,182,177,0.25);
 }
-.hero-image:hover img::after{
-  animation: shine 1s forwards;
-}
-@keyframes shine{
-  100%{left:125%;}
-}
+.hero-image:hover::after{opacity:1}
+
 .hero-content{
   flex:1 1 52%;
   padding:48px;
@@ -94,29 +89,25 @@ body{
   flex-direction:column;
   justify-content:center;
   gap:18px;
-  background:linear-gradient(90deg, rgba(255,255,255,0.01), transparent);
 }
 .tag{
   display:inline-flex;
   align-items:center;
-  gap:6px; /* чуть меньше расстояние */
+  gap:6px;
   font-size:13px;
   color:var(--accent);
   background: rgba(31,182,177,0.06);
   padding:6px 12px;
   border-radius:999px;
   border:1px solid rgba(31,182,177,0.08);
-  width:fit-content;
 }
-
 .tag-icon{
-  width:14px;   /* аккуратный размер */
+  width:14px;
   height:14px;
   object-fit:contain;
   display:inline-block;
   vertical-align:middle;
 }
-
 .title{
   font-family: 'Minecraft', 'DefaultUI', monospace;
   font-size:44px;
@@ -131,13 +122,7 @@ body{
   margin:0;
   font-size:15px;
   max-width:46ch;
-}
-.promise{
-  color:#cff7f6;
-  font-size:15px;
-  margin:0;
-  font-weight:600;
-  letter-spacing:0.2px;
+  font-weight:400;
 }
 .actions{
   display:flex;
@@ -201,25 +186,26 @@ body{
 .btn:hover::after{
   animation: shine 1s forwards;
 }
+@keyframes shine{
+  100%{left:125%;}
+}
 .stats{
   display:flex;
   gap:18px;
   margin-top:18px;
   align-items:flex-start;
 }
-
 .stat{
   background:var(--glass);
   padding:10px 14px;
   border-radius:10px;
   font-size:13px;
-  color:var(--muted); /* тот же цвет, что и выше */
+  color:var(--muted);
   border:1px solid rgba(255,255,255,0.02);
   display:flex;
   flex-direction:column;
   align-items:flex-start;
 }
-
 .stat strong{
   display:block;
   color:#e6f7f6;
@@ -227,4 +213,13 @@ body{
   font-weight:700;
   margin-bottom:6px;
   line-height:1.3;
+}
+@media (max-width:880px){
+  .card{flex-direction:column}
+  .hero-image{order:1; padding:28px}
+  .hero-content{order:2; padding:28px}
+  .title{font-size:32px}
+  .hero-image img{width:60%}
+  .btn-telegram{height:40px;padding:8px 12px;border-radius:10px}
+  .btn-telegram span{font-size:13px}
 }
