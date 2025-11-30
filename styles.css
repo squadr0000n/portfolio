@@ -1,0 +1,199 @@
+@font-face {
+  font-family: 'Minecraft';
+  src: url('fonts/minecraft.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DefaultUI';
+  src: url('fonts/defalut.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --bg:#0b0b0b;
+  --panel:#0f1112;
+  --accent:#1fb6b1;
+  --muted:#9aa3a3;
+  --glass:rgba(255,255,255,0.03);
+  --tg-blue:#2ea6ff;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:'DefaultUI',system-ui,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#050505);
+  color:#e6f7f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px;
+}
+.card{
+  width:100%;
+  max-width:1100px;
+  background:linear-gradient(180deg,var(--panel),#0a0a0a);
+  border-radius:14px;
+  display:flex;
+  gap:0;
+  overflow:visible;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  border:1px solid rgba(31,182,177,0.08);
+}
+.hero-image{
+  flex:1 1 48%;
+  min-height:420px;
+  position:relative;
+  overflow:visible;
+  background:linear-gradient(135deg,rgba(31,182,177,0.03),rgba(0,0,0,0.2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hero-image img{
+  width:80%;
+  max-width:420px;
+  transition:transform 600ms cubic-bezier(0.25,1,0.5,1),
+             filter 400ms ease,
+             box-shadow 400ms ease;
+  transform-origin:center left;
+  border-radius:10px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.5);
+  filter:drop-shadow(0 4px 14px rgba(0,0,0,0.5));
+  border:2px solid rgba(255,255,255,0.05);
+  position:relative;
+  overflow:visible;
+}
+.hero-image img::after{
+  content:"";
+  position:absolute;
+  top:0;left:-75%;
+  width:50%;height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.12),transparent);
+  transform:skewX(-25deg);
+}
+.hero-image:hover img{
+  transform:scale(1.08) translateX(-4px);
+  filter:drop-shadow(0 8px 24px rgba(31,182,177,0.2));
+  box-shadow:0 14px 40px rgba(31,182,177,0.1);
+  border-color:rgba(31,182,177,0.2);
+}
+.hero-image:hover img::after{
+  animation:shine 1.4s ease forwards;
+}
+@keyframes shine{
+  0%{left:-75%;}
+  100%{left:125%;}
+}
+.hero-content{
+  flex:1 1 52%;
+  padding:48px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:18px;
+  background:none; /* убрали переход */
+}
+.tag{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  color:var(--accent);
+  background:rgba(31,182,177,0.06);
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid rgba(31,182,177,0.08);
+  width:fit-content;
+}
+.tag-icon{width:14px;height:14px;object-fit:contain;display:inline-block;vertical-align:middle;}
+.title{
+  font-family:'Minecraft','DefaultUI',monospace;
+  font-size:44px;
+  line-height:1.02;
+  color:#dff9f8;
+  margin:0;
+  letter-spacing:1px;
+  text-shadow:0 2px 0 rgba(0,0,0,0.6),0 6px 18px rgba(31,182,177,0.06);
+}
+.subtitle{color:var(--muted);margin:0;font-size:15px;max-width:46ch;}
+.promise{color:#cff7f6;font-size:15px;margin:0;font-weight:600;letter-spacing:0.2px;}
+.actions{
+  display:flex;
+  gap:12px;
+  margin-top:6px;
+}
+.btn{
+  position:relative;
+  overflow:hidden;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,0.04);
+  transition:transform 300ms ease,box-shadow 300ms ease;
+  background:transparent;
+  color:inherit;
+  font-family:'DefaultUI';
+}
+.btn-primary{
+  background:linear-gradient(90deg,var(--accent),#16a79f);
+  color:#021212;
+  box-shadow:0 8px 30px rgba(31,182,177,0.12);
+  border:none;
+}
+.btn-telegram{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 16px;
+  height:44px;
+  border-radius:12px;
+  background:linear-gradient(90deg,var(--tg-blue),#1f9fff);
+  color:#021212;
+  text-decoration:none;
+  font-weight:700;
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 10px 30px rgba(46,166,255,0.12);
+  position:relative;
+  overflow:hidden;
+}
+.btn-telegram.full-width{
+  flex:1; /* растягиваем кнопку */
+  justify-content:center;
+}
+.btn-telegram img{width:20px;height:20px;display:block;filter:drop-shadow(0 3px 8px rgba(0,0,0,0.25));}
+.btn-telegram span{font-size:14px;letter-spacing:0.2px;}
+.btn:hover{transform:translateY(-3px)}
+.btn::after{
+  content:"";
+  position:absolute;
+  top:0;left:-75%;
+  width:50%;height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.12),transparent);
+  transform:skewX(-25deg);
+}
+.btn:hover::after{animation:shine 1.4s ease forwards;}
+.stats{display:flex;gap:18px;margin-top:18px;align-items:flex-start;}
+.stat{
+  background:var(--glass);
+  padding:12px 16px;
+  border-radius:10px;
+  font-size:13px;
+  color:var(--muted);
+  border:1px solid rgba(255,255,255,0.02);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+.stat strong{
+  display:block;
+  color:#e6f7f6;
+  font-size:16px;
+  font-weight:700;
+  margin-bottom:6px;
+  line-height:1.3;
+}
